@@ -7,12 +7,12 @@ from celebrityshop.shop.models import Item, Celebrity
 class ItemType(DjangoObjectType):
     class Meta:
         model = Item
-        only_fields = ['name']
 
 
 class CelebrityType(DjangoObjectType):
     class Meta:
         model = Celebrity
+        exclude_fields = ['visibility']
 
 
 class Query(graphene.AbstractType):
