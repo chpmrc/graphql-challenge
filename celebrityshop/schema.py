@@ -2,10 +2,19 @@ import graphene
 
 import celebrityshop.ingredients.schema
 
+from celebrityshop.honey.schema import Query as HoneyQuery
+from celebrityshop.purchases.schema import PurchaseMutation, Query as PurchaseQuery
 
-class Query(celebrityshop.ingredients.schema.Query, graphene.ObjectType):
-    # This class will inherit from multiple Queries
-    # as we begin to add more apps to our project
+
+class Query(celebrityshop.ingredients.schema.Query,
+            HoneyQuery,
+            PurchaseQuery,
+            graphene.ObjectType):
     pass
 
-schema = graphene.Schema(query=Query)
+
+class Mutation(PurchaseMutation, graphene.ObjectType):
+    pass
+
+
+schema = graphene.Schema(query=Query, mutation=Mutation)
