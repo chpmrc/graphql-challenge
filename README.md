@@ -80,3 +80,13 @@ Modeling purchases **is entirely up to you**. You might decide to model them as 
 - `listItems: [ItemType]!`
 - `retrieveItem(id: String): ItemType`
 - `purchaseItem(id: String): ?` (The return type depends on how you model your system)
+
+## Bonus
+
+- Hide a selection of fields (e.g. `visibility`) **only** if the user is not authenticated, in a declarative way. Example:
+
+```python
+@permissions(hideVisibilityIfNotAuthenticated)
+def resolve_list_items(self, info):
+  ...
+```
