@@ -1,0 +1,32 @@
+[
+  {
+    "fields": {
+      "name": "Ray-Ban Wayfarer",
+      "price": 129.99,
+      "quantity": 20,
+      "celebrities": [1, 2]
+    },
+    "model": "shop.Item",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "name": "Gucci jacket",
+      "price": 249.99,
+      "quantity": 5,
+      "celebrities": [2, 3]
+    },
+    "model": "shop.Item",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "name": "D&G belt",
+      "price": 30.0,
+      "quantity": 12,
+      "celebrities": [1, 2, 3]
+    },
+    "model": "shop.Item",
+    "pk": 3
+  }
+]

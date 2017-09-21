@@ -1,0 +1,26 @@
+[
+  {
+    "fields": {
+      "name": "Leonardo Di Caprio",
+      "age": 55
+    },
+    "model": "shop.Celebrity",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "name": "Toto Cutugno",
+      "age": 80
+    },
+    "model": "shop.Celebrity",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "name": "The guy that plays Thor",
+      "age": 45
+    },
+    "model": "shop.Celebrity",
+    "pk": 3
+  }
+]

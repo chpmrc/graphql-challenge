@@ -1,11 +1,12 @@
 import graphene
 
-import celebrityshop.ingredients.schema
+import celebrityshop.shop.schema
 
 
-class Query(celebrityshop.ingredients.schema.Query, graphene.ObjectType):
+class Query(celebrityshop.shop.schema.Query, graphene.ObjectType):
     # This class will inherit from multiple Queries
     # as we begin to add more apps to our project
     pass
+
 
 schema = graphene.Schema(query=Query)
