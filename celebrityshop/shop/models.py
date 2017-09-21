@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Celebrity(models.Model):
@@ -25,3 +26,12 @@ class Item(models.Model):
 
   def __str__(self):
       return self.name
+
+
+class Purchase(models.Model):
+  buyer = models.ForeignKey(User)
+  item = models.ForeignKey("Item")
+  quantity = models.IntegerField()
+
+  def __str__(self):
+    return '%s bought %d of %s' % (self.buyer, self.quantity, self.item)
