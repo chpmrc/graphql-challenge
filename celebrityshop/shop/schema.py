@@ -1,4 +1,5 @@
 import graphene
+from celebrityshop.decorators import permissions
 from graphene_django.types import DjangoObjectType
 
 from celebrityshop.shop.models import Item, Celebrity, Purchase
@@ -22,13 +23,19 @@ class PurchaseType(DjangoObjectType):
         model = Purchase
 
 
-class Query(graphene.AbstractType):
+def hideVisibility(info):
+  if not info.context.user.is_authenticated:
+    info.field_asts[0].selection_set.selections = [f for f in filter(lambda f: f.name.value != 'visibility', info.field_asts[0].selection_set.selections)]
+
+
+class Query(object):
     list_items = graphene.List(ItemType)
     list_celebrities = graphene.List(CelebrityType)
     retrieve_item = graphene.Field(ItemType, pk=graphene.Int())
 
+    @permissions(hideVisibility)
     def resolve_list_items(self, info):
-      if info.context.user.is_authenticated():
+      if info.context.user.is_authenticated:
         return Item.objects.all()
       return Item.objects.filter(visibility=Item.VISIBILITY_PUBLIC)
 
@@ -52,8 +59,7 @@ class CreatePurchase(graphene.Mutation):
 
     purchase = graphene.Field(PurchaseType)
 
-    @staticmethod
-    def mutate(root, info, purchase_data=None):
+    def mutate(self, info, purchase_data=None):
       buyer = info.context.user
       item = Item.objects.get(pk=purchase_data['item'])
       quantity = purchase_data['quantity']
@@ -61,5 +67,5 @@ class CreatePurchase(graphene.Mutation):
       return CreatePurchase(purchase=purchase)
 
 
-class Mutation(graphene.AbstractType):
+class Mutation(object):
   create_purchase = CreatePurchase.Field()

@@ -26,7 +26,7 @@ class Item(models.Model):
 
   @property
   def remaining(self):
-    return self.quantity - Purchase.objects.filter(item__pk=self.pk).count()
+    return self.quantity - sum(map(lambda p: p.quantity, Purchase.objects.filter(item__pk=self.pk)))
 
   def __str__(self):
       return self.name
