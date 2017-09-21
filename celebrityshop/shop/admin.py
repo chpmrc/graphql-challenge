@@ -5,3 +5,4 @@ from . import models
 
 admin.site.register(models.Item)
 admin.site.register(models.Celebrity)
+admin.site.register(models.Purchase)

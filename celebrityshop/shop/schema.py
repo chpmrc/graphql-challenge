@@ -5,6 +5,8 @@ from celebrityshop.shop.models import Item, Celebrity, Purchase
 
 
 class ItemType(DjangoObjectType):
+    remaining = graphene.Int(source='remaining')
+
     class Meta:
         model = Item
 

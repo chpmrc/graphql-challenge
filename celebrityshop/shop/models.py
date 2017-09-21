@@ -24,6 +24,10 @@ class Item(models.Model):
   visibility = models.TextField(choices=VISIBILITY_CHOICES, default=VISIBILITY_PUBLIC)
   celebrities = models.ManyToManyField("Celebrity", related_name="items")
 
+  @property
+  def remaining(self):
+    return self.quantity - Purchase.objects.filter(item__pk=self.pk).count()
+
   def __str__(self):
       return self.name
 
