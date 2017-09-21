@@ -17,8 +17,12 @@ class CelebrityType(DjangoObjectType):
 
 class Query(graphene.AbstractType):
     list_items = graphene.List(ItemType)
+    list_celebrities = graphene.List(CelebrityType)
 
-    def resolve_list_items(self, args, request, info):
-      if request.user.is_authenticated():
+    def resolve_list_items(self, info):
+      if info.context.user.is_authenticated():
         return Item.objects.all()
       return Item.objects.filter(visibility=Item.VISIBILITY_PUBLIC)
+
+    def resolve_list_celebrities(self, info):
+      return Celebrity.objects.all()
